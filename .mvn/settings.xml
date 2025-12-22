@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2025 LR-Software (HeFei) Co., Ltd. All Rights Reserved.
+  ~
+  ~ Licensed under the LR-Software License, Version 1.0;
+  ~ https://www.lr.com/licenses
+  -->
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+    <servers>
+        <server>
+            <id>lr-nexus</id>
+            <username>admin</username>
+            <password>123456</password>
+        </server>
+    </servers>
+
+    <mirrors>
+        <mirror>
+            <id>my-nexus</id>
+            <mirrorOf>*</mirrorOf>
+            <name>lr-nexus</name>
+            <url>http://localhost:8081/repository/maven-public/</url>
+        </mirror>
+    </mirrors>
+
+</settings>

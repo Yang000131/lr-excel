@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lr</groupId>
+    <artifactId>lr-excel</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>lr-excel</name>
+    <description>lr-excel</description>
+    <url>https://gitee.com/yang_311414/lr-excel</url>
+    <inceptionYear>2025</inceptionYear>
+
+    <developers>
+        <developer>
+            <id>lr</id>
+            <name>Yang</name>
+            <email>yang_000131@163.com</email>
+            <organization>LR</organization>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>lr-nexus</id>
+            <name>my-internal-nexus</name>
+            <url>http://localhost:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spotless.plugin.version>3.1.0</spotless.plugin.version>
+        <spring-web.version>7.0.2</spring-web.version>
+        <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
+        <lr-commons.version>1.0.0</lr-commons.version>
+        <fast-excel.version>1.3.0</fast-excel.version>
+        <swagger-annotation.version>2.2.41</swagger-annotation.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- spring web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-web.version}</version>
+        </dependency>
+
+        <!-- jakarta servlet -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${jakarta.servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- lr commons -->
+        <dependency>
+            <groupId>com.lr</groupId>
+            <artifactId>lr-commons</artifactId>
+            <version>${lr-commons.version}</version>
+        </dependency>
+
+        <!-- fast excel -->
+        <dependency>
+            <groupId>cn.idev.excel</groupId>
+            <artifactId>fastexcel</artifactId>
+            <version>${fast-excel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotation.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <release>${java.version}</release>
+                </configuration>
+            </plugin>
+            <!-- package jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                            <Build-By>Yang</Build-By>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- spotless -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>${spotless.plugin.version}</version>
+                <configuration>
+                    <java>
+                        <removeUnusedImports/>
+                        <trimTrailingWhitespace/>
+                        <endWithNewline/>
+                        <licenseHeader>
+                            <file>style/copyright/license-headers</file>
+                        </licenseHeader>
+                        <importOrder>
+                            <order>com.lr,*,java</order>
+                            <wildcardsLast>true</wildcardsLast>
+                        </importOrder>
+                    </java>
+                    <pom>
+                        <includes>
+                            <include>pom.xml</include>
+                        </includes>
+                        <sortPom>
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                        </sortPom>
+                    </pom>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
