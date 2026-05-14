@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright 2025 LR-Software (HeFei) Co., Ltd. All Rights Reserved.
-  ~
-  ~ Licensed under the LR-Software License, Version 1.0;
-  ~ https://www.lr.com/licenses
-  -->
 
 <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
 
+    <!-- 认证信息 -->
     <servers>
         <server>
             <id>lr-nexus</id>
-            <username>admin</username>
-            <password>123456</password>
+            <username>680854470601d2fea612ddd1</username>
+            <password>dAmXbP][WZwN</password>
         </server>
     </servers>
 
+    <!-- 公共仓库 -->
     <mirrors>
         <mirror>
-            <id>my-nexus</id>
-            <mirrorOf>*</mirrorOf>
-            <name>lr-nexus</name>
-            <url>http://localhost:8081/repository/maven-public/</url>
+            <id>mirror</id>
+            <mirrorOf>central</mirrorOf>
+            <name>mirror</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
         </mirror>
     </mirrors>
+
+    <!-- 私库的拉取和推送 -->
+    <profiles>
+        <profile>
+            <id>lr-dev</id>
+            <repositories>
+                <repository>
+                    <id>lr-nexus</id>
+                    <url>https://packages.aliyun.com/68163eec1fe97866431511ec/maven/lr-nexus</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                </repository>
+            </repositories>
+            <properties>
+                <altReleaseDeploymentRepository>
+                    lr-nexus::default::https://packages.aliyun.com/68163eec1fe97866431511ec/maven/lr-nexus
+                </altReleaseDeploymentRepository>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 激活配置 -->
+    <activeProfiles>
+        <activeProfile>lr-dev</activeProfile>
+    </activeProfiles>
+
 
 </settings>

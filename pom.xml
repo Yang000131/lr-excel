@@ -9,8 +9,8 @@
 
     <name>lr-excel</name>
     <description>lr-excel</description>
-    <url>https://gitee.com/yang_311414/lr-excel</url>
-    <inceptionYear>2025</inceptionYear>
+    <url>https://github.com/Yang000131/lr-excel</url>
+    <inceptionYear>2026</inceptionYear>
 
     <developers>
         <developer>
@@ -21,23 +21,18 @@
         </developer>
     </developers>
 
-    <distributionManagement>
-        <repository>
-            <id>lr-nexus</id>
-            <name>my-internal-nexus</name>
-            <url>http://localhost:8081/repository/maven-releases/</url>
-        </repository>
-    </distributionManagement>
-
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spotless.plugin.version>3.1.0</spotless.plugin.version>
-        <spring-web.version>7.0.2</spring-web.version>
+        <maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+        <maven.jar.plugin.version>3.5.0</maven.jar.plugin.version>
+        <maven.source.plugin.version>3.3.1</maven.source.plugin.version>
+        <spotless.plugin.version>3.4.0</spotless.plugin.version>
+        <spring-web.version>7.0.7</spring-web.version>
         <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
         <lr-commons.version>1.0.0</lr-commons.version>
         <fast-excel.version>1.3.0</fast-excel.version>
-        <swagger-annotation.version>2.2.41</swagger-annotation.version>
+        <swagger-annotation.version>2.2.49</swagger-annotation.version>
     </properties>
 
     <dependencies>
@@ -85,6 +80,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <release>${java.version}</release>
                 </configuration>
@@ -93,6 +89,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.plugin.version}</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -135,10 +132,18 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>spotless-apply</id>
                         <goals>
                             <goal>apply</goal>
                         </goals>
                         <phase>process-sources</phase>
+                    </execution>
+                    <execution>
+                        <id>spotless-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
                     </execution>
                 </executions>
             </plugin>
