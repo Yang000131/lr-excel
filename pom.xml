@@ -6,6 +6,7 @@
         <groupId>com.lr</groupId>
         <artifactId>lr-parent3</artifactId>
         <version>1.0.0</version>
+        <relativePath/>
     </parent>
 
     <artifactId>lr-excel</artifactId>
